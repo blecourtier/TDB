@@ -415,6 +415,164 @@ if (window.location.hostname === 'alti-web.github.io') {
     box-shadow: 0 8px 24px rgba(79, 140, 255, 0.3);
   }
 
+  /* ─── FORFAIT STOPPÉ BANNER ─── */
+  .forfait-stoppe-banner {
+    display: none;
+    background: linear-gradient(135deg, #2d0606 0%, #4d0c0c 40%, #6b1010 100%);
+    border: 2px solid #ff3333;
+    border-radius: var(--radius);
+    padding: 28px 32px;
+    margin: 20px 40px 0;
+    align-items: center;
+    gap: 24px;
+    box-shadow: 0 0 40px rgba(255, 51, 51, 0.35), 0 0 80px rgba(255, 51, 51, 0.12);
+    animation: stopBannerPulse 1.8s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+  }
+  .forfait-stoppe-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 12px,
+      rgba(255, 51, 51, 0.04) 12px,
+      rgba(255, 51, 51, 0.04) 24px
+    );
+    pointer-events: none;
+  }
+  @keyframes stopBannerPulse {
+    0%, 100% { box-shadow: 0 0 40px rgba(255, 51, 51, 0.35), 0 0 80px rgba(255, 51, 51, 0.12); border-color: #ff3333; }
+    50%       { box-shadow: 0 0 60px rgba(255, 51, 51, 0.55), 0 0 120px rgba(255, 51, 51, 0.2); border-color: #ff6666; }
+  }
+  .forfait-stoppe-banner .stoppe-icon {
+    font-size: 3.2rem;
+    flex-shrink: 0;
+    animation: stopIconShake 2.5s ease-in-out infinite;
+  }
+  @keyframes stopIconShake {
+    0%, 90%, 100% { transform: rotate(0deg); }
+    92%           { transform: rotate(-8deg); }
+    96%           { transform: rotate(8deg); }
+  }
+  .forfait-stoppe-banner .stoppe-body {
+    flex: 1;
+  }
+  .forfait-stoppe-banner .stoppe-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem;
+    color: #ff6666;
+    margin-bottom: 6px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  .forfait-stoppe-banner .stoppe-body p {
+    font-size: 0.95rem;
+    color: #ffbbbb;
+    line-height: 1.5;
+  }
+  .forfait-stoppe-banner .stoppe-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+  .forfait-stoppe-banner .stoppe-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 51, 51, 0.18);
+    border: 1px solid rgba(255, 102, 102, 0.6);
+    color: #ffaaaa;
+    font-weight: 600;
+    font-size: 0.88rem;
+    padding: 10px 18px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: all 0.25s;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .forfait-stoppe-banner .stoppe-btn:hover {
+    background: rgba(255, 51, 51, 0.35);
+    border-color: #ff4444;
+    color: #fff;
+  }
+
+  /* ─── CGV NOTICE (forfait stoppé) ─── */
+  .cgv-stoppe-notice {
+    display: none;
+    background: linear-gradient(135deg, #2d0606, #4d0c0c);
+    border: 2px solid #ff3333;
+    border-radius: var(--radius);
+    padding: 28px 36px;
+    margin: 0 40px 40px;
+    animation: stopBannerPulse 1.8s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+  }
+  .cgv-stoppe-notice::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 12px,
+      rgba(255, 51, 51, 0.04) 12px,
+      rgba(255, 51, 51, 0.04) 24px
+    );
+    pointer-events: none;
+  }
+  .cgv-stoppe-notice-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .cgv-stoppe-notice h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: #ff6666;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .cgv-stoppe-notice p {
+    color: #ffbbbb;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 18px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cgv-stoppe-links {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cgv-stoppe-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255, 51, 51, 0.15);
+    border: 1px solid rgba(255, 102, 102, 0.6);
+    color: #ffaaaa;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 12px 22px;
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+  .cgv-stoppe-link:hover {
+    background: rgba(255, 51, 51, 0.35);
+    border-color: #ff4444;
+    color: #fff;
+  }
+
   /* ─── TOP BAR ─── */
   .topbar {
     display: flex;
@@ -1862,6 +2020,22 @@ if (window.location.hostname === 'alti-web.github.io') {
     <a href="content-peauethique.rar" download class="banner-btn">⬇️ Télécharger le .rar</a>
   </div>
 
+  <!-- ═══ FORFAIT STOPPÉ BANNER (christophe.sre uniquement) ═══ -->
+  <div class="forfait-stoppe-banner" id="forfaitStoppeBanner">
+    <div class="stoppe-icon">⛔</div>
+    <div class="stoppe-body">
+      <h3>Forfait stoppé depuis décembre 2025</h3>
+      <p>
+        Votre abonnement SEO a été suspendu en décembre 2025. Toutes les prestations sont actuellement à l'arrêt.<br>
+        Pour toute question concernant les conditions d'arrêt ou de reprise, veuillez consulter nos CGV.
+      </p>
+    </div>
+    <div class="stoppe-actions">
+      <a href="https://alti-web.fr/cgv-seo/" target="_blank" class="stoppe-btn">📄 Consulter les CGV SEO</a>
+      <a href="https://alti-web.fr/contact-agence-seo/" target="_blank" class="stoppe-btn">✉️ Nous contacter</a>
+    </div>
+  </div>
+
   <!-- ═══ HERO ═══ -->
   <section class="hero">
     <div class="hero-grid">
@@ -2608,6 +2782,22 @@ if (window.location.hostname === 'alti-web.github.io') {
   <div class="sep"></div>
 
   <!-- ═══ FOOTER ═══ -->
+  <!-- ═══ CGV NOTICE (christophe.sre uniquement) ═══ -->
+  <div class="cgv-stoppe-notice" id="cgvStoppeNotice">
+    <div class="cgv-stoppe-notice-inner">
+      <h4>⚠️ Conditions générales de vente applicables</h4>
+      <p>
+        Conformément à nos CGV, l'arrêt d'un abonnement SEO en cours de période engage les conditions prévues au contrat.<br>
+        Nous vous invitons à consulter les documents ci-dessous pour tout recours ou question contractuelle.
+      </p>
+      <div class="cgv-stoppe-links">
+        <a href="https://alti-web.fr/cgv-seo/" target="_blank" class="cgv-stoppe-link">📄 CGV SEO</a>
+        <a href="https://alti-web.fr/cgv/" target="_blank" class="cgv-stoppe-link">📄 CGV Création de site</a>
+        <a href="Charte_Handicap_RSE.pdf" target="_blank" class="cgv-stoppe-link">📋 Charte RSE & Handicap</a>
+      </div>
+    </div>
+  </div>
+
   <footer class="footer-info">
     <div class="footer-grid">
       <div class="footer-block">
@@ -4177,6 +4367,13 @@ function showDownloadBanner(email) {
   var showCreation = creationEmails.indexOf(e) !== -1;
   if (creationSection) creationSection.style.display = showCreation ? '' : 'none';
   if (creationSep) creationSep.style.display = showCreation ? '' : 'none';
+
+  // Bannière "Forfait stoppé" : visible UNIQUEMENT pour christophe.sre@gmail.com
+  var showStoppe = (e === 'christophe.sre@gmail.com');
+  var forfaitStoppeBanner = document.getElementById('forfaitStoppeBanner');
+  var cgvStoppeNotice = document.getElementById('cgvStoppeNotice');
+  if (forfaitStoppeBanner) forfaitStoppeBanner.style.display = showStoppe ? 'flex' : 'none';
+  if (cgvStoppeNotice) cgvStoppeNotice.style.display = showStoppe ? 'block' : 'none';
 }
 
 // Sauvegarde du HTML original pour pouvoir restaurer entre connexions
