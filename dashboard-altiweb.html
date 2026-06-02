@@ -2616,6 +2616,51 @@ if (window.location.hostname === 'alti-web.github.io') {
 
   <div class="sep"></div>
 
+  <!-- ═══ DÉVELOPPEMENT INTERNATIONAL ═══ -->
+  <section class="section" style="padding-top:40px">
+    <div class="section-header">
+      <div class="section-title">
+        <span class="icon" style="background:rgba(79,140,255,0.1)">🌍</span>
+        Développement International
+      </div>
+      <span class="section-count">Europe</span>
+    </div>
+    <p style="color:var(--text-secondary);font-size:0.95rem;margin-bottom:24px;line-height:1.6">
+      Étendez votre visibilité Google bien au-delà des frontières françaises. Sélectionnez les pays européens cibles et recevez une stratégie SEO internationale adaptée.
+    </p>
+    <div class="cards-grid">
+      <a href="javascript:void(0)" onclick="openInternationalPopup()" class="action-card" style="--card-accent:var(--accent)">
+        <div class="card-icon blue">🗺️</div>
+        <div class="card-title">Activer le SEO international — Choisissez vos pays cibles en Europe</div>
+        <div class="card-desc">Sélectionnez un ou plusieurs pays pour déployer votre référencement au-delà de la France</div>
+        <div class="card-row">
+          <span class="card-tag strategy">Stratégie</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+      <a href="javascript:void(0)" onclick="openInternationalPopup()" class="action-card" style="--card-accent:var(--accent-purple)">
+        <div class="card-icon" style="background:rgba(167,139,250,0.12);color:var(--accent-purple)">🌐</div>
+        <div class="card-title">Référencement multilingue & balises hreflang</div>
+        <div class="card-desc">Architecture internationale, contenu localisé, signaux géographiques envoyés à Google</div>
+        <div class="card-row">
+          <span class="card-tag tech">Technique</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+      <a href="javascript:void(0)" onclick="openInternationalPopup()" class="action-card" style="--card-accent:var(--accent-green)">
+        <div class="card-icon green">📈</div>
+        <div class="card-title">Analyse de la concurrence locale par pays</div>
+        <div class="card-desc">Étude des concurrents sur chaque marché cible pour identifier les opportunités de positionnement</div>
+        <div class="card-row">
+          <span class="card-tag seo">SEO</span>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <div class="sep"></div>
+
   <!-- ═══ MON COMPTE ═══ -->
   <section class="section" style="padding-top:40px">
     <div class="section-header">
@@ -3122,6 +3167,113 @@ document.getElementById('serviceLimitPopup').addEventListener('click', function(
 });
 </script>
 
+<!-- ═══ POPUP INTERNATIONAL ═══ -->
+<div id="internationalPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:9999;justify-content:center;align-items:center;backdrop-filter:blur(6px);padding:20px;box-sizing:border-box">
+  <div style="background:#131825;border-radius:20px;max-width:700px;width:100%;max-height:88vh;overflow-y:auto;position:relative;box-shadow:0 30px 80px rgba(0,0,0,0.6);border:1px solid rgba(79,140,255,0.2)">
+    <button onclick="closeInternationalPopup()" style="position:sticky;top:12px;left:calc(100% - 44px);float:right;background:rgba(255,255,255,0.06);border:none;color:var(--text-secondary,#999);font-size:22px;cursor:pointer;width:36px;height:36px;border-radius:50%;line-height:1;z-index:1;margin:12px 12px 0 0">&times;</button>
+    <div style="padding:32px 32px 0;clear:both">
+      <div style="text-align:center;margin-bottom:6px">
+        <div style="font-size:52px;margin-bottom:10px">🌍</div>
+        <h3 style="color:#fff;font-family:'Playfair Display',serif;font-size:1.4rem;margin:0 0 8px">Activer l'international</h3>
+        <p style="color:var(--text-secondary,#8892A8);font-size:0.92rem;max-width:460px;margin:0 auto">Sélectionnez les pays européens où vous souhaitez développer votre SEO. Nous vous recontacterons avec une stratégie adaptée.</p>
+      </div>
+      <!-- Boutons d'action rapide -->
+      <div style="display:flex;gap:10px;justify-content:center;margin:18px 0 20px">
+        <button onclick="selectAllCountries(true)" style="padding:8px 18px;border-radius:8px;border:1px solid rgba(79,140,255,0.4);background:rgba(79,140,255,0.1);color:#4F8CFF;font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s">✅ Tout sélectionner</button>
+        <button onclick="selectAllCountries(false)" style="padding:8px 18px;border-radius:8px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.04);color:var(--text-secondary,#8892A8);font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s">✕ Effacer</button>
+      </div>
+      <!-- Grille des pays -->
+      <div id="intlCountryGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px">
+        <!-- UE -->
+        <div style="grid-column:1/-1;font-size:0.75rem;font-weight:700;color:var(--text-muted,#4A5568);text-transform:uppercase;letter-spacing:0.1em;margin:4px 0 2px">🇪🇺 Union Européenne</div>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇩🇪 Allemagne">🇩🇪 Allemagne</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇦🇹 Autriche">🇦🇹 Autriche</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇧🇪 Belgique">🇧🇪 Belgique</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇧🇬 Bulgarie">🇧🇬 Bulgarie</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇨🇾 Chypre">🇨🇾 Chypre</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇭🇷 Croatie">🇭🇷 Croatie</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇩🇰 Danemark">🇩🇰 Danemark</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇪🇸 Espagne">🇪🇸 Espagne</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇪🇪 Estonie">🇪🇪 Estonie</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇫🇮 Finlande">🇫🇮 Finlande</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇬🇷 Grèce">🇬🇷 Grèce</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇭🇺 Hongrie">🇭🇺 Hongrie</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇮🇪 Irlande">🇮🇪 Irlande</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇮🇹 Italie">🇮🇹 Italie</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇱🇻 Lettonie">🇱🇻 Lettonie</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇱🇹 Lituanie">🇱🇹 Lituanie</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇱🇺 Luxembourg">🇱🇺 Luxembourg</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇲🇹 Malte">🇲🇹 Malte</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇳🇱 Pays-Bas">🇳🇱 Pays-Bas</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇵🇱 Pologne">🇵🇱 Pologne</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇵🇹 Portugal">🇵🇹 Portugal</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇷🇴 Roumanie">🇷🇴 Roumanie</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇸🇰 Slovaquie">🇸🇰 Slovaquie</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇸🇮 Slovénie">🇸🇮 Slovénie</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇸🇪 Suède">🇸🇪 Suède</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇨🇿 Tchéquie">🇨🇿 Tchéquie</button>
+        <!-- Hors UE -->
+        <div style="grid-column:1/-1;font-size:0.75rem;font-weight:700;color:var(--text-muted,#4A5568);text-transform:uppercase;letter-spacing:0.1em;margin:10px 0 2px">🌐 Hors UE / Europe élargie</div>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇬🇧 Royaume-Uni">🇬🇧 Royaume-Uni</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇨🇭 Suisse">🇨🇭 Suisse</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇳🇴 Norvège">🇳🇴 Norvège</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇺🇦 Ukraine">🇺🇦 Ukraine</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇷🇸 Serbie">🇷🇸 Serbie</button>
+        <button class="intl-country-btn" onclick="toggleIntlCountry(this)" data-country="🇹🇷 Turquie">🇹🇷 Turquie</button>
+      </div>
+      <!-- Compteur sélection -->
+      <div id="intlCounterLine" style="text-align:center;font-size:0.88rem;color:var(--text-secondary,#8892A8);margin-bottom:16px">
+        <span id="intlCounter">0</span> pays sélectionné(s)
+      </div>
+    </div>
+    <!-- Footer sticky -->
+    <div style="padding:0 32px 32px">
+      <div id="intlForm">
+        <button id="intlSubmitBtn" onclick="sendInternationalRequest()" style="width:100%;padding:15px;border-radius:12px;border:none;background:linear-gradient(135deg,#4F8CFF,#3a6fd8);color:#fff;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.25s;letter-spacing:0.02em">
+          🌍 Valider ma sélection et recevoir la stratégie
+        </button>
+        <p id="intlErrMsg" style="text-align:center;color:#f87171;font-size:0.85rem;margin-top:10px;display:none">Veuillez sélectionner au moins un pays.</p>
+      </div>
+      <div id="intlSuccess" style="display:none;text-align:center;padding:20px 0">
+        <div style="font-size:52px;margin-bottom:12px">✅</div>
+        <h4 style="color:#34d399;font-size:1.1rem;margin-bottom:8px">Demande envoyée !</h4>
+        <p style="color:var(--text-secondary,#8892A8);font-size:0.9rem">Nous allons préparer votre stratégie SEO internationale. Vous serez contacté(e) très prochainement.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.intl-country-btn {
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  color: var(--text-secondary, #8892A8);
+  font-size: 0.88rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s;
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.3;
+}
+.intl-country-btn:hover {
+  border-color: rgba(79,140,255,0.35);
+  background: rgba(79,140,255,0.08);
+  color: #fff;
+}
+.intl-country-btn.selected {
+  border-color: var(--accent, #4F8CFF);
+  background: rgba(79,140,255,0.15);
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(79,140,255,0.3);
+}
+@media (max-width: 520px) {
+  #intlCountryGrid { grid-template-columns: repeat(2,1fr) !important; }
+}
+</style>
+
 <!-- ═══ POPUP HANDI-ACCUEILLANTE ═══ -->
 <div id="handiPopup" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;justify-content:center;align-items:center;backdrop-filter:blur(4px)">
   <div style="background:var(--bg-secondary, #1e1e2e);border-radius:16px;padding:32px;max-width:460px;width:90%;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.5);border:1px solid rgba(255,255,255,0.08)">
@@ -3157,6 +3309,72 @@ function sendDominationRequest(btn) {
     btn.textContent = '🚀 Recevoir ma stratégie';
   });
 }
+
+// ── INTERNATIONAL ──────────────────────────────────────
+function openInternationalPopup() {
+  document.getElementById('intlForm').style.display = 'block';
+  document.getElementById('intlSuccess').style.display = 'none';
+  document.getElementById('intlErrMsg').style.display = 'none';
+  var btn = document.getElementById('intlSubmitBtn');
+  if (btn) { btn.disabled = false; btn.textContent = '🌍 Valider ma sélection et recevoir la stratégie'; }
+  selectAllCountries(false);
+  document.getElementById('internationalPopup').style.display = 'flex';
+}
+
+function closeInternationalPopup() {
+  document.getElementById('internationalPopup').style.display = 'none';
+}
+
+document.getElementById('internationalPopup').addEventListener('click', function(e) {
+  if (e.target === this) closeInternationalPopup();
+});
+
+function toggleIntlCountry(btn) {
+  btn.classList.toggle('selected');
+  updateIntlCounter();
+}
+
+function selectAllCountries(state) {
+  var btns = document.querySelectorAll('.intl-country-btn');
+  btns.forEach(function(b) {
+    if (state) b.classList.add('selected');
+    else b.classList.remove('selected');
+  });
+  updateIntlCounter();
+}
+
+function updateIntlCounter() {
+  var count = document.querySelectorAll('.intl-country-btn.selected').length;
+  document.getElementById('intlCounter').textContent = count;
+}
+
+function sendInternationalRequest() {
+  var selected = Array.from(document.querySelectorAll('.intl-country-btn.selected')).map(function(b){ return b.getAttribute('data-country'); });
+  if (selected.length === 0) {
+    document.getElementById('intlErrMsg').style.display = 'block';
+    return;
+  }
+  document.getElementById('intlErrMsg').style.display = 'none';
+  var btn = document.getElementById('intlSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Envoi en cours…';
+  var email = localStorage.getItem('altiweb_login_email') || '—';
+  var paysList = selected.join(', ');
+  emailjs.send('service_12wtkng', 'template_tib1gk7', {
+    name: '🌍 DEMANDE SEO INTERNATIONAL\nEmail client : ' + email + '\nDate : ' + new Date().toLocaleString('fr-FR'),
+    email: email,
+    message: 'Pays sélectionnés (' + selected.length + ') :\n' + paysList
+  }).then(function() {
+    document.getElementById('intlForm').style.display = 'none';
+    document.getElementById('intlSuccess').style.display = 'block';
+  }).catch(function() {
+    btn.disabled = false;
+    btn.textContent = '🌍 Valider ma sélection et recevoir la stratégie';
+    document.getElementById('intlErrMsg').textContent = 'Erreur lors de l\'envoi. Réessayez.';
+    document.getElementById('intlErrMsg').style.display = 'block';
+  });
+}
+// ───────────────────────────────────────────────────────
 
 var handiCurrentAction = '';
 
