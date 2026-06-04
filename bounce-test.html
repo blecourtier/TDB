@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bounce Test — Alti-Web</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: #0a0a0a;
+    color: #c8c8c8;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .container {
+    width: 100%;
+    max-width: 580px;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .header-icon {
+    width: 42px;
+    height: 42px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+  }
+  .header h1 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e0e0e0;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .header p {
+    font-size: 0.75rem;
+    color: #555;
+    margin-top: 2px;
+  }
+  .card {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 10px;
+    padding: 28px;
+  }
+  .field {
+    margin-bottom: 16px;
+  }
+  .field label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 7px;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 11px 14px;
+    background: #0d0d0d;
+    border: 1px solid #2a2a2a;
+    border-radius: 7px;
+    color: #ccc;
+    font-family: 'Courier New', monospace;
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: #444;
+  }
+  .field select option { background: #111; }
+  .field textarea { resize: vertical; min-height: 80px; }
+  .sep-line {
+    border: none;
+    border-top: 1px solid #1e1e1e;
+    margin: 20px 0;
+  }
+  .preview-box {
+    background: #0a0a0a;
+    border: 1px solid #1e1e1e;
+    border-radius: 7px;
+    padding: 16px;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    color: #666;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 220px;
+    overflow-y: auto;
+    margin-bottom: 16px;
+  }
+  .preview-box .val { color: #999; }
+  .preview-box .key { color: #555; }
+  .btn-send {
+    width: 100%;
+    padding: 13px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: #ccc;
+    font-family: 'Courier New', monospace;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .btn-send:hover:not(:disabled) {
+    background: #222;
+    border-color: #444;
+    color: #fff;
+  }
+  .btn-send:disabled { opacity: 0.4; cursor: default; }
+  .status {
+    text-align: center;
+    font-size: 0.82rem;
+    margin-top: 14px;
+    min-height: 20px;
+  }
+  .status.ok { color: #4ade80; }
+  .status.err { color: #f87171; }
+  .status.loading { color: #888; }
+  .tag {
+    display: inline-block;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="header-icon">⚙️</div>
+    <div>
+      <h1>Bounce Return — Test</h1>
+      <p>Simule un NDR / Mailer-Daemon pour tester les configs</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="tag">⚡ internal tool</span>
+
+    <div class="field">
+      <label>Adresse email qui aurait "bouncé"</label>
+      <input type="email" id="bounceEmail" placeholder="client@exemple.fr" oninput="updatePreview()" />
+    </div>
+
+    <div class="field">
+      <label>Type de bounce</label>
+      <select id="bounceType" onchange="updatePreview()">
+        <option value="550">550 — Mailbox does not exist (hard bounce)</option>
+        <option value="551">551 — User not local / forwarding failed</option>
+        <option value="552">552 — Mailbox full (soft bounce)</option>
+        <option value="554">554 — Transaction failed / policy rejection</option>
+        <option value="421">421 — Service temporarily unavailable</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Domaine d'origine simulé (serveur qui bounce)</label>
+      <input type="text" id="bounceDomain" value="mail.google.com" oninput="updatePreview()" />
+    </div>
+
+    <hr class="sep-line">
+
+    <div class="field">
+      <label>Aperçu du message envoyé à benoit@lecourtier.net</label>
+      <div class="preview-box" id="previewBox">—</div>
+    </div>
+
+    <button class="btn-send" id="sendBtn" onclick="sendBounce()">
+      ▶ Envoyer le bounce test
+    </button>
+    <div class="status" id="statusMsg"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+(function() { emailjs.init('nf_vsJRJn_ucqKgbR'); })();
+
+var BOUNCE_CODES = {
+  '550': 'Requested action not taken: mailbox unavailable — User unknown in virtual mailbox table',
+  '551': 'User not local; please try forwarding — The email account that you tried to reach does not exist',
+  '552': 'Requested mail action aborted: exceeded storage allocation — Mailbox full',
+  '554': 'Transaction failed — This message was blocked because its content presents a potential security issue',
+  '421': 'Service temporarily unavailable — The server was unable to process your request due to a temporary overload'
+};
+
+function getValues() {
+  return {
+    email: (document.getElementById('bounceEmail').value || 'unknown@example.com').trim(),
+    code:  document.getElementById('bounceType').value,
+    domain: (document.getElementById('bounceDomain').value || 'mail.google.com').trim()
+  };
+}
+
+function buildBounceBody(v) {
+  var date = new Date().toUTCString();
+  var msgId = '<' + Math.random().toString(36).slice(2) + '.' + Date.now() + '@' + v.domain + '>';
+  return [
+    'Delivery Status Notification (Failure)',
+    '────────────────────────────────────────────────',
+    'This is an automatically generated Delivery Status Notification (DSN).',
+    'Delivery to the following recipient FAILED PERMANENTLY:',
+    '',
+    '    ' + v.email,
+    '',
+    'Technical details of permanent failure:',
+    'Google tried to deliver your message, but it was rejected by the server',
+    'for the recipient domain by ' + v.domain + '.',
+    '',
+    'The error that the other server returned was:',
+    v.code + ' ' + BOUNCE_CODES[v.code],
+    '',
+    '────────────────────────────────────────────────',
+    'Final-Recipient: rfc822; ' + v.email,
+    'Action: failed',
+    'Status: ' + v.code.charAt(0) + '.1.1',
+    'Remote-MTA: dns; ' + v.domain,
+    'Diagnostic-Code: smtp; ' + v.code + ' ' + BOUNCE_CODES[v.code],
+    'Last-Attempt-Date: ' + date,
+    'Message-ID: ' + msgId,
+    '────────────────────────────────────────────────',
+    '[TEST BOUNCE — Alti-Web Config Test Tool]'
+  ].join('\n');
+}
+
+function updatePreview() {
+  var v = getValues();
+  var body = buildBounceBody(v);
+  document.getElementById('previewBox').textContent = body;
+}
+
+function sendBounce() {
+  var v = getValues();
+  if (!v.email || !v.email.includes('@')) {
+    setStatus('err', '✕ Adresse email invalide.');
+    return;
+  }
+  var btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+  setStatus('loading', '⏳ Envoi en cours…');
+
+  var body = buildBounceBody(v);
+  var subject = 'Mail delivery failed: returning message to sender — ' + v.email;
+
+  emailjs.send('service_12wtkng', 'template_tib1gk7', {
+    name: 'MAILER-DAEMON — ' + subject,
+    email: 'benoit@lecourtier.net',
+    message: body
+  }).then(function() {
+    setStatus('ok', '✓ Bounce test envoyé à benoit@lecourtier.net');
+    btn.disabled = false;
+  }).catch(function(err) {
+    setStatus('err', '✕ Erreur : ' + (err.text || JSON.stringify(err)));
+    btn.disabled = false;
+  });
+}
+
+function setStatus(type, msg) {
+  var el = document.getElementById('statusMsg');
+  el.className = 'status ' + type;
+  el.textContent = msg;
+}
+
+// Init preview
+updatePreview();
+</script>
+</body>
+</html>
