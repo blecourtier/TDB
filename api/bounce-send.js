@@ -1,13 +1,8 @@
 // Vercel Serverless Function — Bounce Test Email Sender
 // POST /api/bounce-send
 // Body : { email, code, domain }
-// Envoie un email formaté NDR/Mailer-Daemon à benoit@lecourtier.net
-
-const EMAILJS_ENDPOINT   = 'https://api.emailjs.com/api/v1.0/email/send';
-const EMAILJS_SERVICE_ID = 'service_12wtkng';
-const EMAILJS_TEMPLATE_ID = 'template_tib1gk7';
-const EMAILJS_USER_ID    = 'nf_vsJRJn_ucqKgbR';
-const NOTIFY_EMAIL       = 'benoit@lecourtier.net';
+// Envoie un email formaté NDR/Mailer-Daemon À l'adresse saisie
+// Requiert : RESEND_API_KEY dans les variables d'environnement Vercel
 
 const BOUNCE_CODES = {
   '550': 'Requested action not taken: mailbox unavailable — User unknown in virtual mailbox table',
@@ -24,17 +19,19 @@ function buildBounceBody(email, code, domain) {
   return [
     'Delivery Status Notification (Failure)',
     '────────────────────────────────────────────────',
-    'This is an automatically generated Delivery Status Notification (DSN).',
-    'Delivery to the following recipient FAILED PERMANENTLY:',
     '',
-    '    ' + email,
+    'This is an automatically generated Delivery Status Notification.',
+    '',
+    'Delivery to the following recipient failed permanently:',
+    '',
+    '        ' + email,
     '',
     'Technical details of permanent failure:',
-    'The mail server tried to deliver your message, but it was rejected',
-    'by the server for the recipient domain via ' + domain + '.',
+    'The mail server attempted to deliver your message, but it was rejected',
+    'by the destination server ' + domain + '.',
     '',
     'The error that the other server returned was:',
-    code + ' ' + desc,
+    '>>> ' + code + ' ' + desc,
     '',
     '────────────────────────────────────────────────',
     'Final-Recipient: rfc822; ' + email,
@@ -44,8 +41,10 @@ function buildBounceBody(email, code, domain) {
     'Diagnostic-Code: smtp; ' + code + ' ' + desc,
     'Last-Attempt-Date: ' + date,
     'Message-ID: <' + msgId + '>',
+    '',
     '────────────────────────────────────────────────',
-    '[TEST BOUNCE — Alti-Web Config Test Tool]',
+    '** This is an automatically generated message. Do not reply. **',
+    'Mail Delivery Subsystem — ' + domain,
   ].join('\n');
 }
 
@@ -55,6 +54,12 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Method not allowed' });
+
+  // Vérification clé Resend
+  const resendKey = process.env.RESEND_API_KEY;
+  if (!resendKey) {
+    return res.status(500).json({ ok: false, error: 'RESEND_API_KEY non configurée dans Vercel' });
+  }
 
   let body = req.body;
   if (typeof body === 'string') { try { body = JSON.parse(body); } catch (_) { body = {}; } }
@@ -68,34 +73,29 @@ module.exports = async (req, res) => {
     return res.status(400).json({ ok: false, error: 'Email invalide' });
   }
 
-  const subject  = 'Mail delivery failed: returning message to sender — ' + email;
+  const subject  = 'Delivery Status Notification (Failure)';
   const bodyText = buildBounceBody(email, code, domain);
 
   try {
-    const resp = await fetch(EMAILJS_ENDPOINT, {
+    const resp = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
+        'Authorization': 'Bearer ' + resendKey,
         'Content-Type': 'application/json',
-        'origin': 'https://alti-board.fr',
       },
       body: JSON.stringify({
-        service_id:  EMAILJS_SERVICE_ID,
-        template_id: EMAILJS_TEMPLATE_ID,
-        user_id:     EMAILJS_USER_ID,
-        accessToken: process.env.EMAILJS_PRIVATE_KEY || undefined,
-        template_params: {
-          name:    subject,
-          email:   NOTIFY_EMAIL,
-          message: bodyText,
-        },
+        from: 'Mail Delivery Subsystem <mailer-daemon@alti-board.fr>',
+        to:      [email],
+        subject: subject,
+        text:    bodyText,
       }),
     });
 
-    const text = await resp.text().catch(() => '');
+    const data = await resp.json().catch(() => ({}));
     if (!resp.ok) {
-      return res.status(502).json({ ok: false, error: 'EmailJS error ' + resp.status + ': ' + text });
+      return res.status(502).json({ ok: false, error: 'Resend error ' + resp.status + ': ' + JSON.stringify(data) });
     }
-    return res.status(200).json({ ok: true, subject, to: NOTIFY_EMAIL });
+    return res.status(200).json({ ok: true, subject, to: email, id: data.id });
   } catch (err) {
     return res.status(500).json({ ok: false, error: err.message });
   }
