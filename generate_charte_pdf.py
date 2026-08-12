@@ -344,12 +344,12 @@ story.append(bullets([
     "contrepartie du travail effectivement accompli.",
     "<b>Un justificatif officiel</b> de la mise en invalidité sera bien sûr fourni "
     "au client, sur simple demande écrite, dans le respect du secret médical et de "
-    "la confidentialité des données de santé (cf. article 11 / 12 ci-après).",
+    "la confidentialité des données de santé (cf. article 12 / 13 ci-après).",
 ]))
 story.append(Paragraph(
     "Cette clause s'inscrit dans la continuité du droit de la force majeure "
     "(article 1218 du Code civil) et tient compte de la particulière vulnérabilité "
-    "du prestataire, déjà rappelée aux articles 02 et 11. Elle est acceptée par le "
+    "du prestataire, déjà rappelée aux articles 02 et 12. Elle est acceptée par le "
     "client lors du règlement de la première facture (cf. clause d'acceptation finale).",
     style_emph))
 
@@ -364,8 +364,32 @@ story.append(Paragraph(
     "(perte de chiffre d'affaires, perte de clientèle, atteinte à l'image, etc.).",
     style_body))
 
-# ───── 10 (ex-09) ─────
-story += section_header("10", "Protection contre la discrimination")
+# ───── 10 NOUVEAU : Facturation et correction des trop-perçus ─────
+story += section_header("10", "Facturation, abonnements et correction des trop-perçus")
+story.append(Paragraph(
+    "Les forfaits sont réglés par le client via son espace de paiement sécurisé "
+    "<b>Stripe</b>. Le client demeure seul responsable de la gestion et du paiement "
+    "de ses abonnements sur son compte Stripe (souscription, modification, "
+    "résiliation).", style_body))
+story.append(Paragraph(
+    "Dans le cas où un abonnement supplémentaire viendrait à être facturé par erreur "
+    "(par exemple un site facturé en trop), il est expressément convenu entre les "
+    "parties que :", style_body))
+story.append(bullets([
+    "<b>Un bon d'avoir est édité</b> par le prestataire à hauteur du montant "
+    "indûment perçu.",
+    "<b>Les mois suivants de prestation sont offerts</b>, jusqu'à compensation "
+    "intégrale du trop-perçu.",
+    "La gestion des abonnements relevant du compte Stripe du client, une telle "
+    "erreur ne saurait engager la responsabilité de l'agence.",
+]))
+story.append(Paragraph(
+    "Le trop-perçu n'est donc pas remboursé en numéraire mais intégralement compensé "
+    "sous forme de mois de prestation offerts, sans que le client ne subisse de "
+    "préjudice financier.", style_emph))
+
+# ───── 11 (ex-10) ─────
+story += section_header("11", "Protection contre la discrimination")
 story.append(Paragraph(
     "Conformément aux <b>articles 225-1 et 225-2 du Code pénal</b>, toute "
     "discrimination fondée sur le handicap est un délit :", style_body))
@@ -379,8 +403,8 @@ story.append(Paragraph(
     "Sanctions encourues : jusqu'à 3 ans d'emprisonnement et 45 000 euros d'amende "
     "pour les personnes physiques.", style_emph_red))
 
-# ───── 11 (ex-10) ─────
-story += section_header("11", "Protection contre l'abus de faiblesse")
+# ───── 12 (ex-11) ─────
+story += section_header("12", "Protection contre l'abus de faiblesse")
 story.append(Paragraph(
     "Le prestataire, en raison de son handicap reconnu à 80% et plus, de sa maladie "
     "neurodégénérative et de son placement sous curatelle renforcée, est une "
@@ -431,8 +455,8 @@ story.append(Paragraph(
     "comportement abusif aux autorités compétentes et de déposer plainte le cas "
     "échéant.", style_body))
 
-# ───── 12 (ex-11) ─────
-story += section_header("12", "Confidentialité et données de santé")
+# ───── 13 (ex-12) ─────
+story += section_header("13", "Confidentialité et données de santé")
 story.append(Paragraph(
     "Les informations relatives à la situation de handicap du prestataire communiquées "
     "dans cette charte le sont dans un cadre strictement contractuel.", style_body))
@@ -450,8 +474,8 @@ story.append(Paragraph(
     "déroulement de la mission (disponibilité, délais, aménagements), sans avoir à "
     "en détailler les raisons médicales.", style_emph))
 
-# ───── 13 (ex-12) ─────
-story += section_header("13", "Rôle du curateur dans la relation commerciale")
+# ───── 14 (ex-13) ─────
+story += section_header("14", "Rôle du curateur dans la relation commerciale")
 story.append(Paragraph(
     "La curatelle renforcée implique que le curateur assiste le prestataire pour "
     "certains actes. Dans le cadre de la relation commerciale :", style_body))
@@ -465,8 +489,8 @@ story.append(bullets([
     "celle-ci est requise, est susceptible d'être <b>annulé</b> (article 465 du Code civil).",
 ]))
 
-# ───── 14 (ex-13) ─────
-story += section_header("14", "Notre démarche RSE au quotidien")
+# ───── 15 (ex-14) ─────
+story += section_header("15", "Notre démarche RSE au quotidien")
 story.append(Paragraph("Éthique professionnelle", style_h2))
 story.append(Paragraph(
     "Nous pratiquons un SEO responsable (White Hat), conforme aux directives des "
@@ -485,8 +509,8 @@ story.append(Paragraph(
     "Nous traitons les données qui nous sont confiées dans le strict respect du RGPD.",
     style_body))
 
-# ───── 15 (ex-14) ─────
-story += section_header("15", "Vos droits en tant que client")
+# ───── 16 (ex-15) ─────
+story += section_header("16", "Vos droits en tant que client")
 story.append(bullets([
     "<b>Droit à l'information :</b> vous pouvez nous interroger à tout moment sur "
     "nos méthodes et les résultats obtenus.",
@@ -500,8 +524,8 @@ story.append(bullets([
     "avec des tiers.",
 ]))
 
-# ───── 16 (ex-15) ─────
-story += section_header("16", "Référent et contact")
+# ───── 17 (ex-16) ─────
+story += section_header("17", "Référent et contact")
 story.append(Paragraph(
     "Pour toute question relative à cette charte ou à un besoin d'adaptation "
     "particulier :", style_body))
@@ -536,7 +560,7 @@ story.append(Spacer(1, 6))
 story.append(Paragraph(
     "Cette charte Handicap &amp; RSE est un document d'engagement professionnel. "
     "Elle complète les conditions générales de vente et le contrat de prestation. "
-    "<b>Version 2.1 — 2026.</b>",
+    "<b>Version 2.2 — 2026.</b>",
     style_footer))
 
 
