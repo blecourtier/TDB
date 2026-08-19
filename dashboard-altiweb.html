@@ -4590,13 +4590,11 @@ function showDownloadBanner(email) {
   if (bannerAdc) {
     bannerAdc.style.display = downloadBannerAdcoaching.indexOf(e) !== -1 ? 'flex' : 'none';
   }
-  // Section "Création de site internet" : visible UNIQUEMENT pour e2mwdconsulting@gmail.com
-  var creationEmails = ['e2mwdconsulting@gmail.com'];
+  // Section "Création de site internet" : visible pour TOUS les clients
   var creationSection = document.getElementById('creationSection');
   var creationSep = document.getElementById('creationSep');
-  var showCreation = creationEmails.indexOf(e) !== -1;
-  if (creationSection) creationSection.style.display = showCreation ? '' : 'none';
-  if (creationSep) creationSep.style.display = showCreation ? '' : 'none';
+  if (creationSection) creationSection.style.display = '';
+  if (creationSep) creationSep.style.display = '';
 
   // Bannière "Forfait stoppé" : visible UNIQUEMENT pour christophe.sre@gmail.com
   var showStoppe = (e === 'christophe.sre@gmail.com');
