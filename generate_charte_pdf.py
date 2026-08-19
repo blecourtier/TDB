@@ -509,8 +509,19 @@ story.append(Paragraph(
     "Nous traitons les données qui nous sont confiées dans le strict respect du RGPD.",
     style_body))
 
-# ───── 16 (ex-15) ─────
-story += section_header("16", "Vos droits en tant que client")
+# ───── 16 NOUVEAU : Création de site internet ─────
+story += section_header("16", "Création de site internet")
+story.append(Paragraph(
+    "Lorsque la prestation comprend la création d'un site internet, celle-ci est "
+    "réalisée par le prestataire à l'aide de l'outil <b>Lovable</b>, plateforme de "
+    "développement web assistée par intelligence artificielle.", style_body))
+story.append(Paragraph(
+    "Le code généré est systématiquement relu, ajusté et finalisé par le prestataire, "
+    "qui conserve la maîtrise du code final afin d'en garantir la qualité, la rapidité "
+    "et l'optimisation pour le référencement naturel.", style_body))
+
+# ───── 17 (ex-15) ─────
+story += section_header("17", "Vos droits en tant que client")
 story.append(bullets([
     "<b>Droit à l'information :</b> vous pouvez nous interroger à tout moment sur "
     "nos méthodes et les résultats obtenus.",
@@ -524,8 +535,8 @@ story.append(bullets([
     "avec des tiers.",
 ]))
 
-# ───── 17 (ex-16) ─────
-story += section_header("17", "Référent et contact")
+# ───── 18 (ex-16) ─────
+story += section_header("18", "Référent et contact")
 story.append(Paragraph(
     "Pour toute question relative à cette charte ou à un besoin d'adaptation "
     "particulier :", style_body))
@@ -560,7 +571,7 @@ story.append(Spacer(1, 6))
 story.append(Paragraph(
     "Cette charte Handicap &amp; RSE est un document d'engagement professionnel. "
     "Elle complète les conditions générales de vente et le contrat de prestation. "
-    "<b>Version 2.2 — 2026.</b>",
+    "<b>Version 2.3 — 2026.</b>",
     style_footer))
 
 
