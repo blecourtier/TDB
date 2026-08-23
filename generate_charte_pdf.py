@@ -520,8 +520,42 @@ story.append(Paragraph(
     "qui conserve la maîtrise du code final afin d'en garantir la qualité, la rapidité "
     "et l'optimisation pour le référencement naturel.", style_body))
 
-# ───── 17 (ex-15) ─────
-story += section_header("17", "Vos droits en tant que client")
+# ───── 17 NOUVEAU : Sauvegardes et hébergement du site ─────
+story += section_header("17", "Sauvegardes et hébergement du site internet")
+story.append(Paragraph(
+    "Lorsque le prestataire assure la création et/ou l'hébergement du site internet "
+    "du client, les responsabilités en matière de sauvegarde et de continuité sont "
+    "réparties comme suit :", style_body))
+story.append(bullets([
+    "<b>Sauvegarde du site :</b> il appartient au client de <b>constituer et de "
+    "conserver ses propres sauvegardes</b> du site (contenus, données, code), ou "
+    "d'en faire la <b>demande expresse au prestataire</b>. La sauvegarde régulière "
+    "du site relève de la responsabilité du client.",
+    "<b>Transfert en cas de cessation :</b> en cas de <b>clôture de l'activité</b> "
+    "du prestataire, ou en cas d'<b>empêchement durable lié à son état de santé</b> "
+    "(cf. articles 07 et 08), il appartient au client de <b>récupérer la sauvegarde "
+    "de son site et de la transférer vers un nouvel hébergeur</b> de son choix.",
+    "<b>Assistance à la récupération :</b> le prestataire fournira, sur simple "
+    "demande écrite, la dernière sauvegarde disponible du site afin de permettre "
+    "ce transfert.",
+]))
+story.append(Paragraph(
+    "Le client demeure ainsi maître de la continuité et de la pérennité de son "
+    "site internet.", style_emph))
+
+# ───── 18 NOUVEAU : Disponibilité et congés annuels ─────
+story += section_header("18", "Disponibilité et congés annuels")
+story.append(Paragraph(
+    "Le prestataire est susceptible d'être en <b>congés annuels durant le mois "
+    "d'août</b>. Durant cette période, les emails et les demandes peuvent <b>ne pas "
+    "être traités ni recevoir de réponse immédiate</b>.", style_body))
+story.append(Paragraph(
+    "Les délais habituels de réponse et de réalisation reprennent à l'issue de "
+    "cette période. Cette indisponibilité saisonnière, portée à la connaissance du "
+    "client, ne saurait constituer un manquement du prestataire.", style_emph))
+
+# ───── 19 (ex-15) ─────
+story += section_header("19", "Vos droits en tant que client")
 story.append(bullets([
     "<b>Droit à l'information :</b> vous pouvez nous interroger à tout moment sur "
     "nos méthodes et les résultats obtenus.",
@@ -535,8 +569,8 @@ story.append(bullets([
     "avec des tiers.",
 ]))
 
-# ───── 18 (ex-16) ─────
-story += section_header("18", "Référent et contact")
+# ───── 20 (ex-16) ─────
+story += section_header("20", "Référent et contact")
 story.append(Paragraph(
     "Pour toute question relative à cette charte ou à un besoin d'adaptation "
     "particulier :", style_body))
@@ -571,7 +605,7 @@ story.append(Spacer(1, 6))
 story.append(Paragraph(
     "Cette charte Handicap &amp; RSE est un document d'engagement professionnel. "
     "Elle complète les conditions générales de vente et le contrat de prestation. "
-    "<b>Version 2.3 — 2026.</b>",
+    "<b>Version 2.4 — 2026.</b>",
     style_footer))
 
 
